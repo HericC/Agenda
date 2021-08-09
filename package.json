@@ -22,7 +22,7 @@
     },
     "keywords": [],
     "author": "Heric Macedo Oliveira Silva",
-    "license": "ISC",
+    "license": "MIT",
     "devDependencies": {
         "@types/connect-flash": "^0.0.37",
         "@types/csurf": "^1.11.2",
