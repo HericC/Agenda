@@ -7,11 +7,11 @@ class AuthController implements AuthControllerProtocol {
     }
 
     register(req: Request, res: Response): void {
-        res.send('ola mundo');
+        res.json({ url: 'register', ...req.body });
     }
 
     login(req: Request, res: Response): void {
-        res.send('ola mundo');
+        res.json({ url: 'login', ...req.body });
     }
 
     logout(req: Request, res: Response): void {

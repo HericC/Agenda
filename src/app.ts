@@ -8,8 +8,9 @@ import csrf from 'csurf';
 
 import appProtocol from './interfaces/appProtocol';
 
-import ErrorsMiddlewares from './middlewares/ErrorsMiddlewares';
-import routes from './routes/routes';
+import GlobalMiddlewares from './middlewares/GlobalMiddlewares';
+
+import { routes, authRoutes } from './routes/routes';
 
 class App implements appProtocol {
     private app = express();
@@ -56,17 +57,19 @@ class App implements appProtocol {
     }
 
     private middlewares(): void {
-        this.app.use(session({ secret: 'dfgkJSHEdrieiuSedfii', resave: false, saveUninitialized: false }));
-        this.app.use(flash());
-        this.app.use(helmet());
-        this.app.use(csrf());
         this.app.use(express.static('public'));
         this.app.use(express.urlencoded({ extended: true }));
-        this.app.use(ErrorsMiddlewares.csrf);
+        this.app.use(session({ secret: 'dfgkJSHEdrieiuSedfii', resave: false, saveUninitialized: false }));
+        this.app.use(flash());
+        // this.app.use(helmet());
+        this.app.use(csrf());
+        this.app.use(GlobalMiddlewares.error);
+        this.app.use(GlobalMiddlewares.csrf);
     }
 
     private routes(): void {
         this.app.use(routes);
+        this.app.use('/auth', authRoutes);
     }
 
     private conectDatabase(): void {
