@@ -8,6 +8,7 @@ import csrf from 'csurf';
 
 import appProtocol from './interfaces/appProtocol';
 
+import ErrorsMiddlewares from './middlewares/ErrorsMiddlewares';
 import routes from './routes/routes';
 
 class App implements appProtocol {
@@ -61,6 +62,7 @@ class App implements appProtocol {
         this.app.use(csrf());
         this.app.use(express.static('public'));
         this.app.use(express.urlencoded({ extended: true }));
+        this.app.use(ErrorsMiddlewares.csrf);
     }
 
     private routes(): void {
