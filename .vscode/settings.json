@@ -12,7 +12,8 @@
     },
     "[typescript]": {
         "editor.formatOnSave": false
-    }
+    },
+    "editor.formatOnSave": false
 }
 // "workbench.editorAssociations": {
 //     "*.ipynb": "jupyter.notebook.ipynb"
