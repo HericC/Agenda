@@ -9,8 +9,10 @@ import csrf from 'csurf';
 import appProtocol from './interfaces/appProtocol';
 
 import GlobalMiddlewares from './middlewares/GlobalMiddlewares';
+import Middlewares from './middlewares/Middlewares';
 
-import { routes, authRoutes } from './routes/routes';
+import routes from './routes/routes';
+import authRoutes from './routes/authRoutes';
 
 class App implements appProtocol {
     private app = express();
@@ -63,6 +65,7 @@ class App implements appProtocol {
         this.app.use(flash());
         // this.app.use(helmet());
         this.app.use(csrf());
+
         this.app.use(GlobalMiddlewares.error);
         this.app.use(GlobalMiddlewares.csrf);
         this.app.use(GlobalMiddlewares.messagesErrors);
@@ -73,6 +76,9 @@ class App implements appProtocol {
     private routes(): void {
         this.app.use(routes);
         this.app.use('/auth', authRoutes);
+
+        this.app.get('/404', (req, res) => res.render('404'));
+        this.app.get('/*', (req, res) => res.redirect('/404'));
     }
 
     private conectDatabase(): void {

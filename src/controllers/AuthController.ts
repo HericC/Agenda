@@ -5,11 +5,6 @@ import { AuthControllerProtocol } from '../interfaces/controllersProtocols';
 import user from '../models/User';
 
 class AuthController implements AuthControllerProtocol {
-    public async index(req: Request, res: Response): Promise<Response | void> {
-        if (req.session.user) return res.render('404');
-        return res.render('login');
-    }
-
     public async register(req: Request, res: Response): Promise<Response | void> {
         try {
             const body = {
@@ -29,7 +24,7 @@ class AuthController implements AuthControllerProtocol {
             return res.redirect('back');
         } catch (error) {
             console.error(error);
-            return res.render('404');
+            return res.redirect('/404');
         }
     }
 
@@ -54,7 +49,7 @@ class AuthController implements AuthControllerProtocol {
             return res.redirect('/');
         } catch (error) {
             console.error(error);
-            return res.render('404');
+            return res.redirect('/404');
         }
     }
 

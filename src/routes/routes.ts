@@ -1,19 +1,11 @@
 import { Router } from 'express';
 import homeController from '../controllers/HomeController';
-import authController from '../controllers/AuthController';
+
+import Middlewares from '../middlewares/Middlewares';
 
 const routes = Router();
-const authRoutes = Router();
-
-routes.get('/404', (req, res) => {
-    res.render('404');
-});
 
 routes.get('/', homeController.index);
-routes.get('/login', authController.index);
+routes.get('/login', Middlewares.unlogged, homeController.login);
 
-authRoutes.post('/register', authController.register);
-authRoutes.post('/login', authController.login);
-authRoutes.get('/logout', authController.logout);
-
-export { routes, authRoutes };
+export default routes;
