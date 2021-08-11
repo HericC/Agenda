@@ -21,6 +21,14 @@ class GlobalMiddlewares implements GlobalMiddlewaresProtocol {
         res.locals.success = req.flash('success');
         next();
     }
+
+    public async userSession(req: Request, res: Response, next: NextFunction): Promise<void> {
+        res.locals.user = {
+            name: req.session.user?.name,
+            logged: !!req.session.user,
+        };
+        next();
+    }
 }
 
 export default new GlobalMiddlewares();

@@ -5,4 +5,5 @@ export interface GlobalMiddlewaresProtocol {
     error(err: any, req: Request, res: Response, next: NextFunction): Promise<void>;
     messagesErrors(req: Request, res: Response, next: NextFunction): Promise<void>;
     messagesSuccess(req: Request, res: Response, next: NextFunction): Promise<void>;
+    userSession(req: Request, res: Response, next: NextFunction): Promise<void>;
 }

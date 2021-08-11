@@ -67,6 +67,7 @@ class App implements appProtocol {
         this.app.use(GlobalMiddlewares.csrf);
         this.app.use(GlobalMiddlewares.messagesErrors);
         this.app.use(GlobalMiddlewares.messagesSuccess);
+        this.app.use(GlobalMiddlewares.userSession);
     }
 
     private routes(): void {

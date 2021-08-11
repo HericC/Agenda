@@ -21,13 +21,7 @@ class User implements userProtocol {
         if (!body.name) errors.push('Nome requerido');
         if (!body.email) errors.push('E-mail requerido');
         if (!body.password) errors.push('Senha requerido');
-
-        if (!validator.isEmail(body.email)) {
-            errors.push('E-mail inválido');
-        } else {
-            const result = await this.userExists(body.email);
-            if (result) errors.push(result);
-        }
+        if (!validator.isEmail(body.email)) errors.push('E-mail inválido');
 
         if (body.password.length < 3 || body.password.length > 50)
             errors.push('A senha precisa ter entre 3 e 50 caracteres');
@@ -35,15 +29,12 @@ class User implements userProtocol {
         return errors;
     }
 
-    public async userExists(email: string): Promise<string> {
-        const user = await this.model.findOne({ email });
-        if (user) return 'E-mail já existe';
-        return '';
-    }
-
-    public async register(body: userBodyProtocol): Promise<string[] | userModelProtocol> {
+    public async register(body: userBodyProtocol): Promise<userModelProtocol | string[]> {
         const checkResult = await this.check(body);
         if (checkResult.length > 0) return checkResult;
+
+        const user = await this.model.findOne({ email: body.email });
+        if (user) return ['E-mail já existe'];
 
         const salt = bcryptjs.genSaltSync();
         // eslint-disable-next-line no-param-reassign
@@ -52,10 +43,15 @@ class User implements userProtocol {
         return this.model.create(body);
     }
 
-    public async login(body: userBodyProtocol): Promise<string[] | userModelProtocol> {
+    public async login(body: userBodyProtocol): Promise<userModelProtocol | string[]> {
         const checkResult = await this.check(body);
         if (checkResult.length > 0) return checkResult;
-        return this.model.create(body);
+
+        const user = await this.model.findOne({ email: body.email });
+        if (!user) return ['Usuario não existe'];
+        if (!bcryptjs.compareSync(body.password, user.password)) return ['Usuario não existe (senha)'];
+
+        return user;
     }
 
     private createModel(): Model<userModelProtocol> {

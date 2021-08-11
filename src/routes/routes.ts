@@ -14,5 +14,6 @@ routes.get('/login', authController.index);
 
 authRoutes.post('/register', authController.register);
 authRoutes.post('/login', authController.login);
+authRoutes.get('/logout', authController.logout);
 
 export { routes, authRoutes };

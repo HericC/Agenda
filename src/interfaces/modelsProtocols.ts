@@ -10,7 +10,6 @@ export type userModelProtocol = Document & userBodyProtocol;
 
 export interface userProtocol {
     db: Model<userModelProtocol>;
-    userExists(email: string): Promise<string>;
     register(body: userBodyProtocol): Promise<string[] | userModelProtocol>;
     login(body: userBodyProtocol): Promise<string[] | userModelProtocol>;
 }
