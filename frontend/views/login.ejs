@@ -14,17 +14,24 @@
                     <h4>Faça seu cadastro</h4>
                     <p>Se você ainda não possui uma conta, preencha o formulário abaixo:</p>
 
+                    <%- include('includes/messages'); -%>
+
                     <form action="auth/register" method="POST">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
                         <div class="mb-3">
-                          <label for="email-register" class="form-label">Seu E-mail</label>
-                          <input type="email" class="form-control" id="email-register" name="email-register" placeholder="E-mail">
+                          <label for="nameRegister" class="form-label">Seu Nome</label>
+                          <input type="text" class="form-control" id="nameRegister" name="nameRegister" placeholder="Nome">
                         </div>
 
                         <div class="mb-3">
-                          <label for="password-register" class="form-label">Sua Senha</label>
-                          <input type="password" class="form-control" id="password-register" name="password-register" placeholder="Senha">
+                          <label for="emailRegister" class="form-label">Seu E-mail</label>
+                          <input type="email" class="form-control" id="emailRegister" name="emailRegister" placeholder="E-mail">
+                        </div>
+
+                        <div class="mb-3">
+                          <label for="passwordRegister" class="form-label">Sua Senha</label>
+                          <input type="password" class="form-control" id="passwordRegister" name="passwordRegister" placeholder="Senha">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Criar minha conta</button>
@@ -35,17 +42,19 @@
                     <h4>Entrar no sistema</h4>
                     <p>Se você já possui uma conta, faça o login abaixo:</p>
 
+                    <%- include('includes/messages'); -%>
+
                     <form action="auth/login" method="POST">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
                         <div class="mb-3">
-                          <label for="email-login" class="form-label">Seu E-mail</label>
-                          <input type="email" class="form-control" id="email-login" name="email-login" placeholder="E-mail">
+                          <label for="emailLogin" class="form-label">Seu E-mail</label>
+                          <input type="email" class="form-control" id="emailLogin" name="emailLogin" placeholder="E-mail">
                         </div>
 
                         <div class="mb-3">
-                          <label for="password-login" class="form-label">Sua Senha</label>
-                          <input type="password" class="form-control" id="password-login" name="password-login" placeholder="Senha">
+                          <label for="passwordLogin" class="form-label">Sua Senha</label>
+                          <input type="password" class="form-control" id="passwordLogin" name="passwordLogin" placeholder="Senha">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Entrar</button>

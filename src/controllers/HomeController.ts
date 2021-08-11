@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { ControllerProtocol } from '../interfaces/controllersProtocols';
 
 class HomeController implements ControllerProtocol {
-    index(req: Request, res: Response): void {
+    public async index(req: Request, res: Response): Promise<void> {
         res.render('index');
     }
 }

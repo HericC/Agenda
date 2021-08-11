@@ -21,7 +21,7 @@ class App implements appProtocol {
 
     private initUsed = false;
 
-    constructor() {
+    public constructor() {
         dotenv.config();
     }
 
@@ -65,6 +65,8 @@ class App implements appProtocol {
         this.app.use(csrf());
         this.app.use(GlobalMiddlewares.error);
         this.app.use(GlobalMiddlewares.csrf);
+        this.app.use(GlobalMiddlewares.messagesErrors);
+        this.app.use(GlobalMiddlewares.messagesSuccess);
     }
 
     private routes(): void {
