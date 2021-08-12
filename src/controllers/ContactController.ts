@@ -76,7 +76,16 @@ class ContactController implements ContactControllerProtocol {
     }
 
     public async delete(req: Request, res: Response): Promise<Response | void> {
-        //
+        try {
+            const result = await contact.db.findByIdAndDelete(req.params.id);
+            if (Array.isArray(result)) req.flash('errors', result);
+
+            req.flash('success', 'Contato apagado com sucesso.');
+            return res.redirect('back');
+        } catch (error) {
+            console.error(error);
+            return res.redirect('/404');
+        }
     }
 }
 
