@@ -10,3 +10,11 @@ export interface AuthControllerProtocol {
     login(req: Request, res: Response): Promise<Response | void>;
     logout(req: Request, res: Response): Promise<Response | void>;
 }
+
+export interface ContactControllerProtocol {
+    index(req: Request, res: Response): Promise<Response | void>;
+    register(req: Request, res: Response): Promise<Response | void>;
+    editPage(req: Request, res: Response): Promise<Response | void>;
+    edit(req: Request, res: Response): Promise<Response | void>;
+    delete(req: Request, res: Response): Promise<Response | void>;
+}

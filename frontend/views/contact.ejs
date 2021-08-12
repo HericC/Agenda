@@ -1,0 +1,53 @@
+<%- include('includes/header'); -%>
+<%- include('includes/navbar'); -%>
+
+<main>
+    <div class="row">
+        <div class="col-lg-2"></div>
+
+        <div class="col-lg-8 my-3">
+            <h1 class="text-center">Contatos</h1>
+            <p class="text-center lead">Crie ou edite um contato abaixo</p>
+
+            <%- include('includes/messages'); -%>
+
+            <% if (contact._id) { %>
+                <form action="/contatos/edit/<%= contact._id %>" method="POST">
+            <% } else { %>
+                <form action="/contatos/register" method="POST">
+            <% } %>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                <div class="mb-3">
+                  <label for="firstNameRegister" class="form-label">Seu Nome</label>
+                  <input type="text" class="form-control" id="firstNameRegister" name="firstNameRegister" placeholder="Nome" value="<%= contact.firstName %>">
+                </div>
+
+                <div class="mb-3">
+                  <label for="lastNameRegister" class="form-label">Seu Sobrenome</label>
+                  <input type="text" class="form-control" id="lastNameRegister" name="lastNameRegister" placeholder="Sobrenome"value="<%= contact.lastName %>">
+                </div>
+
+                <div class="mb-3">
+                  <label for="emailRegister" class="form-label">Seu E-mail</label>
+                  <input type="email" class="form-control" id="emailRegister" name="emailRegister" placeholder="E-mail"value="<%= contact.email %>">
+                </div>
+
+                <div class="mb-3">
+                  <label for="phoneRegister" class="form-label">Sua Senha</label>
+                  <input type="tel" class="form-control" id="phoneRegister" name="phoneRegister" placeholder="Telefone"value="<%= contact.phone %>">
+                </div>
+
+                <% if (contact._id) { %>
+                    <button type="submit" class="btn btn-primary">Editar contato</button>
+                <% } else { %>
+                    <button type="submit" class="btn btn-primary">Criar contato</button>
+                <% } %>
+            </form>
+        </div>
+
+        <div class="col-lg-2"></div>
+    </div>
+</main>
+
+<%- include('includes/footer'); -%>

@@ -1,15 +1,31 @@
 import { Document, Model } from 'mongoose';
 
-export interface userBodyProtocol {
+export interface UserBodyProtocol {
     name: string;
     email: string;
     password: string;
 }
 
-export type userModelProtocol = Document & userBodyProtocol;
+export type UserModelProtocol = UserBodyProtocol & Document;
 
-export interface userProtocol {
-    db: Model<userModelProtocol>;
-    register(body: userBodyProtocol): Promise<string[] | userModelProtocol>;
-    login(body: userBodyProtocol): Promise<string[] | userModelProtocol>;
+export interface UserProtocol {
+    db: Model<UserModelProtocol>;
+    register(body: UserBodyProtocol): Promise<UserModelProtocol | string[]>;
+    login(body: UserBodyProtocol): Promise<UserModelProtocol | string[]>;
+}
+
+export interface ContactBodyProtocol {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+}
+
+export type ContactModelProtocol = ContactBodyProtocol & Document;
+
+export interface ContactProtocol {
+    db: Model<ContactModelProtocol>;
+    register(body: ContactBodyProtocol): Promise<ContactModelProtocol | string[]>;
+    edit(id: string, body: ContactBodyProtocol): Promise<ContactModelProtocol | string[]>;
+    delete(body: ContactBodyProtocol): Promise<ContactModelProtocol | string[]>;
 }

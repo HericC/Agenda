@@ -2,20 +2,20 @@ import { Schema, model, Model } from 'mongoose';
 import validator from 'validator';
 import bcryptjs from 'bcryptjs';
 
-import { userBodyProtocol, userModelProtocol, userProtocol } from '../interfaces/modelsProtocols';
+import { UserBodyProtocol, UserModelProtocol, UserProtocol } from '../interfaces/modelsProtocols';
 
-class User implements userProtocol {
-    private model: Model<userModelProtocol>;
+class User implements UserProtocol {
+    private model: Model<UserModelProtocol>;
 
     public constructor() {
         this.model = this.createModel();
     }
 
-    get db(): Model<userModelProtocol> {
+    get db(): Model<UserModelProtocol> {
         return this.model;
     }
 
-    private async check(body: userBodyProtocol): Promise<string[]> {
+    private async check(body: UserBodyProtocol): Promise<string[]> {
         const errors: string[] = [];
 
         if (!body.name) errors.push('Nome requerido');
@@ -29,7 +29,7 @@ class User implements userProtocol {
         return errors;
     }
 
-    public async register(body: userBodyProtocol): Promise<userModelProtocol | string[]> {
+    public async register(body: UserBodyProtocol): Promise<UserModelProtocol | string[]> {
         const checkResult = await this.check(body);
         if (checkResult.length > 0) return checkResult;
 
@@ -43,7 +43,7 @@ class User implements userProtocol {
         return this.model.create(body);
     }
 
-    public async login(body: userBodyProtocol): Promise<userModelProtocol | string[]> {
+    public async login(body: UserBodyProtocol): Promise<UserModelProtocol | string[]> {
         const checkResult = await this.check(body);
         if (checkResult.length > 0) return checkResult;
 
@@ -54,7 +54,7 @@ class User implements userProtocol {
         return user;
     }
 
-    private createModel(): Model<userModelProtocol> {
+    private createModel(): Model<UserModelProtocol> {
         const schema = new Schema({
             name: {
                 type: String,
@@ -70,7 +70,7 @@ class User implements userProtocol {
             },
         });
 
-        return model<userModelProtocol>('user', schema);
+        return model<UserModelProtocol>('user', schema);
     }
 }
 

@@ -12,7 +12,8 @@ import GlobalMiddlewares from './middlewares/GlobalMiddlewares';
 import Middlewares from './middlewares/Middlewares';
 
 import routes from './routes/routes';
-import authRoutes from './routes/authRoutes';
+import authRoutes from './routes/auth.routes';
+import contactRoutes from './routes/contact.routes';
 
 class App implements appProtocol {
     private app = express();
@@ -76,6 +77,7 @@ class App implements appProtocol {
     private routes(): void {
         this.app.use(routes);
         this.app.use('/auth', authRoutes);
+        this.app.use('/contatos', Middlewares.logged, contactRoutes);
 
         this.app.get('/404', (req, res) => res.render('404'));
         this.app.get('/*', (req, res) => res.redirect('/404'));
