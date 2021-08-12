@@ -99,7 +99,7 @@ class App implements appProtocol {
             .replace('<user>', user)
             .replace('<password>', password);
 
-        mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true }, (err) => {
+        mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false }, (err) => {
             if (!err) {
                 console.log('MongoDB connection established');
                 this.app.emit('connected_DB');
