@@ -7,7 +7,7 @@
         "test": "tests"
     },
     "scripts": {
-        "start": "npm run build:back && node dist/index.js",
+        "start": "npm run build:back && node dist/server.js",
         "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
         "build:front": "webpack",
         "build:front-w": "webpack -w",
