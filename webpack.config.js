@@ -1,8 +1,8 @@
 const path = require('path');
 
 module.exports = {
-    mode: 'development',
-    // mode: 'production',
+    // mode: 'development',
+    mode: 'production',
     entry: './frontend/assets/ts/index.ts',
     devtool: 'source-map',
     // devtool: 'inline-source-map',

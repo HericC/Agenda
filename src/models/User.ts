@@ -49,7 +49,7 @@ class User implements UserProtocol {
 
         const user = await this.model.findOne({ email: body.email });
         if (!user) return ['Usuario não existe'];
-        if (!bcryptjs.compareSync(body.password, user.password)) return ['Usuario não existe (senha)'];
+        if (!bcryptjs.compareSync(body.password, user.password)) return ['Usuario não existe'];
 
         return user;
     }

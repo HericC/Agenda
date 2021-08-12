@@ -12,9 +12,9 @@
             <%- include('includes/messages'); -%>
 
             <% if (contact._id) { %>
-                <form action="/contatos/edit/<%= contact._id %>" method="POST">
+                <form action="/contatos/edit/<%= contact._id %>" method="POST" id="formContact">
             <% } else { %>
-                <form action="/contatos/register" method="POST">
+                <form action="/contatos/register" method="POST" id="formContact">
             <% } %>
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
