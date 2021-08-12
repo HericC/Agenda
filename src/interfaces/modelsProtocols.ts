@@ -29,3 +29,9 @@ export interface ContactProtocol {
     edit(id: string, body: ContactBodyProtocol): Promise<ContactModelProtocol | string[]>;
     delete(body: ContactBodyProtocol): Promise<ContactModelProtocol | string[]>;
 }
+
+declare module 'express-session' {
+    interface SessionData {
+        user: UserModelProtocol;
+    }
+}
